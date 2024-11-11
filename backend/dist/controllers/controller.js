@@ -11,20 +11,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getCandidatesHandler = exports.loginHandler = exports.createUserHandler = void 0;
 const Servise_1 = require("../services/Servise");
-// import { JWT_SECRET } from '../config';
 const createUserHandler = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { username, password } = req.body;
         if (!username || !password) {
-            res.status(400).json({ message: 'Username and password are required', success: false });
-            return;
+            throw new Error('Username and password are required');
         }
         const user = yield (0, Servise_1.createUser)(username, password);
         if (!user) {
-            res.status(400).json({ message: 'User existing ', success: false });
-            return;
+            throw new Error('User existing ');
         }
-        res.status(201).json({ message: 'User created successfully', user: user, success: true });
+        res.status(201).json({ message: 'User created successfully', data: user, success: true });
     }
     catch (error) {
         res.status(400).json({ message: error.message, success: false });
@@ -35,15 +32,19 @@ const loginHandler = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     try {
         const { username, password } = req.body;
         if (!username || !password) {
-            res.status(400).json({ message: 'Username and password are required', success: false });
-            return;
+            throw new Error('Username and password are required');
         }
-        const user = yield (0, Servise_1.login)(username, password);
-        if (!user) {
-            res.status(400).json({ message: 'User not found', success: false });
-            return;
+        const token = yield (0, Servise_1.login)(username, password);
+        if (!token) {
+            throw new Error('Incorrect user or password');
         }
-        res.status(200).json({ message: 'Login successful', user: user, success: true });
+        res.cookie('token', token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENVIORMENT === 'production',
+            maxAge: 3600000,
+            sameSite: 'none',
+        });
+        res.status(200).json({ message: 'Login successful', data: token, success: true });
     }
     catch (error) {
         res.status(400).json({ message: error.message, success: false });
@@ -54,8 +55,7 @@ const getCandidatesHandler = (req, res) => __awaiter(void 0, void 0, void 0, fun
     try {
         const Candidates = yield (0, Servise_1.getAllCandidates)();
         if (!Candidates) {
-            res.status(400).json({ message: 'Candidates not found', success: false });
-            return;
+            throw new Error('Candidates not found');
         }
         res.status(200).json({ data: Candidates, success: true });
     }

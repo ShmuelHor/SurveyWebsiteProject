@@ -1,53 +1,34 @@
-import './App.css';
-import { useState } from 'react';
-import { useAppDispatch } from './store/hooks'; 
-import { registerUser, loginUser, selectUser } from './store/features/users/usersSlice';
-import { User, UserData } from './types';
-import { useSelector } from 'react-redux';
+import "./App.css";
+import Login from "./components/User/Login";
+import Registration from "./components/User/Registration";
+import Error from "./components/User/Error";
+import VotingPage from "./components/candidates/ListCandidates/VotingPage";
+import { Route, Routes } from "react-router-dom";
+import Statistics from "./components/Statistics/Statistics";
+import PrivateRoute from "./components/PrivateRoute";
+import { useSelector } from "react-redux";
+import { selectUser } from "./store/features/users/usersSlice";
 
 function App() {
-  const dispatch = useAppDispatch();
-
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const User:UserData|null = useSelector(selectUser);
-  const handleRegister = () => {
-    const user: User = { username, password };
-    dispatch(registerUser(user));
-  };
-
-  const handleLogin = () => {
-    const user: User = { username, password };
-    dispatch(loginUser(user));
-  };
+    const data = useSelector(selectUser);
 
   return (
     <div className="App">
-        <h1>{User?.message}</h1>
-      <div>
-        <label htmlFor="username">Username:</label>
-        <input
-          id="username"
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          placeholder="Enter username"
+      <Routes>
+        <Route path="/register" element={<Registration />} />
+        <Route path="/" element={<Login />} />
+        <Route path="/votes" element={<VotingPage />} />
+        <Route
+          path="/statistics"
+          element={
+            <PrivateRoute
+              isAdmin={data.user?.data?.isAdmin === true ? true : false}
+              children={<Statistics />}
+            ></PrivateRoute>
+          }
         />
-      </div>
-      
-      <div>
-        <label htmlFor="password">Password:</label>
-        <input
-          id="password"
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Enter password"
-        />
-      </div>
-      
-      <button onClick={handleRegister}>Register User</button>
-      <button onClick={handleLogin}>Login User</button>
+      </Routes>
+      <Error />
     </div>
   );
 }
