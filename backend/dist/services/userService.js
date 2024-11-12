@@ -12,9 +12,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAllUsers = exports.getAllCandidates = exports.login = exports.createUser = void 0;
+exports.updateUserVoteStatus = exports.getAllUsers = exports.login = exports.createUser = void 0;
 const UserModel_1 = __importDefault(require("../models/UserModel"));
-const CandidateModel_1 = __importDefault(require("../models/CandidateModel"));
 const uuid_1 = require("uuid");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
@@ -69,19 +68,6 @@ const login = (username, password) => __awaiter(void 0, void 0, void 0, function
     }
 });
 exports.login = login;
-const getAllCandidates = () => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const candidate = yield CandidateModel_1.default.find();
-        if (!candidate) {
-            throw new Error("No candidates found");
-        }
-        return candidate;
-    }
-    catch (err) {
-        throw err;
-    }
-});
-exports.getAllCandidates = getAllCandidates;
 const getAllUsers = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const user = yield UserModel_1.default.find();
@@ -95,3 +81,24 @@ const getAllUsers = () => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.getAllUsers = getAllUsers;
+const updateUserVoteStatus = (idUser, idCandidate) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const user = yield (0, utils_1.getUSerById)(idUser);
+        if (!user) {
+            throw new Error("User not found");
+        }
+        const candidate = yield (0, utils_1.getCandidateById)(idCandidate);
+        if (!candidate) {
+            throw new Error("Candidate not found");
+        }
+        user.hasVoted = true;
+        user.votedFor = candidate;
+        const updatedUser = yield user.save();
+        const Users = yield (0, exports.getAllUsers)();
+        return Users;
+    }
+    catch (err) {
+        throw err;
+    }
+});
+exports.updateUserVoteStatus = updateUserVoteStatus;

@@ -26,12 +26,9 @@ export function verifyToken(
   const tokenWithoutBearer = token.startsWith("Bearer ")
     ? token.slice(7)
     : token;
-
-  console.log("Token received:", tokenWithoutBearer);
-
+    
   jwt.verify(tokenWithoutBearer, Jwt_Secret as string, (err, decoded) => {
     if (err) {
-      console.log("JWT verification failed:", err);
       return res.status(401).json({
         message: "Invalid or expired token",
         success: false,

@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getAllUsersHandler = exports.getCandidatesHandler = exports.loginHandler = exports.createUserHandler = void 0;
+exports.getAllUsersHandler = exports.loginHandler = exports.createUserHandler = void 0;
 const userService_1 = require("../services/userService");
 const createUserHandler = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -40,16 +40,6 @@ const loginHandler = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     }
 });
 exports.loginHandler = loginHandler;
-const getCandidatesHandler = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const Candidates = yield (0, userService_1.getAllCandidates)();
-        res.status(200).json({ data: Candidates, success: true });
-    }
-    catch (error) {
-        res.status(400).json({ message: error.message, success: false });
-    }
-});
-exports.getCandidatesHandler = getCandidatesHandler;
 const getAllUsersHandler = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const users = yield (0, userService_1.getAllUsers)();

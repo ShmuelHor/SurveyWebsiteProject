@@ -46,7 +46,11 @@ export const fetchCandidates = createAsyncThunk<
 const candidatesSlice = createSlice({
   name: "candidates",
   initialState,
-  reducers: {},
+  reducers: {
+    updateCandidate: (state, action) => {
+        state.candidates.data = action.payload;
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchCandidates.pending, (state) => {
@@ -66,5 +70,7 @@ const candidatesSlice = createSlice({
 export const selectCandidates = (state: RootState) => {
   return state.candidates;
 };
+
+export const { updateCandidate } = candidatesSlice.actions;
 
 export default candidatesSlice.reducer;

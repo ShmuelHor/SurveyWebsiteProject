@@ -1,0 +1,162 @@
+/* כללי */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  /* מיכל הכללי של עמוד ההרשמה */
+  .registration-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    min-height: 100vh;
+    background-color: #f2f2f2;
+    background-image: linear-gradient(135deg, #ff7f00, #ffb400); /* רקע עם גרדיאנט */
+    box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.2); /* צללית רכה */
+  }
+  
+  /* כותרת עמוד ההרשמה */
+  .registration-header {
+    font-size: 42px;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #ffb400, #ff7f00); /* גרדיאנט מרהיב לכותרת */
+    padding: 20px 40px;
+    border-radius: 30px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    width: 100%;
+    max-width: 700px;
+    text-align: center;
+    letter-spacing: 2px;
+  }
+  
+  /* עיצוב עבור הטופס */
+  .registration-form {
+    width: 100%;
+    max-width: 600px;
+    background-color: #292929;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    transition: all 0.3s ease;
+  }
+  
+  .registration-form:hover {
+    transform: scale(1.02); /* הוספתי אפקט ריחוף */
+  }
+  
+  /* תוויות השדות */
+  .input-label {
+    font-size: 18px;
+    color: white;
+    margin-bottom: 8px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  /* שדות קלט */
+  .input-field {
+    padding: 14px;
+    font-size: 16px;
+    border-radius: 12px;
+    border: 1px solid #ffb400;
+    background-color: #444;
+    color: white;
+    margin-bottom: 20px;
+    outline: none;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+  }
+  
+  .input-field:focus {
+    border-color: #ff7f00;
+    background-color: #333;
+  }
+  
+  /* כפתור Reset */
+  .reset-button {
+    background-color: #777;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    border: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  .reset-button:hover {
+    background-color: #888;
+    transform: translateY(-3px);
+  }
+  
+  /* כפתור Submit */
+  .submit-button {
+    background-color: #ffb400;
+    color: white;
+    padding: 14px 20px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    width: 100%;
+  }
+  
+  .submit-button:hover {
+    background-color: #e68900;
+    transform: translateY(-3px);
+  }
+  
+  /* כפתור Login */
+  .login-button {
+    background-color: #333;
+    color: white;
+    font-weight: normal;
+    padding: 14px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-top: 20px;
+    width: 100%;
+  }
+  
+  .login-button:hover {
+    background-color: #555;
+    transform: translateY(-3px);
+  }
+  
+  /* עיצוב בעת שינוי רספונסיביות */
+  @media (max-width: 768px) {
+    .registration-form {
+      width: 90%;
+    }
+  
+    .registration-header {
+      font-size: 36px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .registration-form {
+      width: 100%;
+      padding: 20px;
+    }
+  
+    .registration-header {
+      font-size: 30px;
+    }
+  }
+  

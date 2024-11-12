@@ -64,33 +64,6 @@ export const fetchLoginUser = createAsyncThunk<
   }
 });
 
-export const fetchUsers = createAsyncThunk<
-  User[],
-  void,
-  { rejectValue: string }
->("users/fetchUsers", async (_, thunkAPI) => {
-  try {
-    const token = localStorage.getItem("Token");
-    const response = await fetch("http://localhost:3000/api/users", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        ...(token && { Authorization: `Bearer ${token}` }),
-      },
-    });
-    const data: User[] = await response.json();
-    if (!response.ok) {
-      throw new Error("Failed to fetch users");
-    }
-    return data;
-  } catch (error: unknown) {
-    return thunkAPI.rejectWithValue(
-      error instanceof Error ? error.message : "An unknown error occurred"
-    );
-  }
-})
-
-
 const usersSlice = createSlice({
   name: "users",
   initialState,
@@ -98,6 +71,13 @@ const usersSlice = createSlice({
     LogOut: (state) => {
       localStorage.removeItem("Token");
       state.user = null;
+    },
+    updateUsres: (state, action) => {
+        console.log("999999999999999999999999999999999")
+
+      state.users = action.payload;
+      console.log("Users: ",state.users);
+
     },
   },
   extraReducers: (builder) => {
@@ -125,24 +105,12 @@ const usersSlice = createSlice({
       .addCase(fetchLoginUser.rejected, (state, action) => {
         state.error = action.payload || "";
         state.status = "failed";
-      })
-      .addCase(fetchUsers.pending, (state) => {
-        state.status = "loading";
-        state.error = null;
-      })
-      .addCase(fetchUsers.fulfilled, (state, action) => {
-        state.status = "succeeded";
-        state.users = action.payload;
-      })
-      .addCase(fetchUsers.rejected, (state, action) => {
-        state.error = action.payload || "";
-        state.status = "failed";
       });
   },
 });
 
 export const selectUser = (state: RootState) => state.users;
 
-export const { LogOut } = usersSlice.actions;
+export const { LogOut, updateUsres } = usersSlice.actions;
 
 export default usersSlice.reducer;

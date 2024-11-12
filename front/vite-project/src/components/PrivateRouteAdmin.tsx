@@ -5,7 +5,7 @@ interface PrivateRouteProps {
   isAdmin: boolean;
 }
 
-const PrivateRoute: React.FC<PrivateRouteProps> = ({
+const PrivateRouteAdmin: React.FC<PrivateRouteProps> = ({
   children,
   isAdmin,
 }) => {
@@ -23,4 +23,4 @@ const PrivateRoute: React.FC<PrivateRouteProps> = ({
   return <>{isLoading ? <h1>Loading...</h1> : children}</>;
 };
 
-export default PrivateRoute;
+export default PrivateRouteAdmin;

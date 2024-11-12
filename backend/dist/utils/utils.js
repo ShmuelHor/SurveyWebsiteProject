@@ -13,6 +13,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IfUserExists = IfUserExists;
+exports.getUSerById = getUSerById;
+exports.getAllUsers = getAllUsers;
+exports.getCandidateById = getCandidateById;
+const CandidateModel_1 = __importDefault(require("../models/CandidateModel"));
 const UserModel_1 = __importDefault(require("../models/UserModel"));
 function IfUserExists(username) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -23,6 +27,36 @@ function IfUserExists(username) {
         }
         else {
             return { userExists: false, user: null };
+        }
+    });
+}
+function getUSerById(idUser) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const users = yield UserModel_1.default.find();
+        const userFind = users.find((u) => u.id === idUser);
+        if (userFind) {
+            return userFind;
+        }
+        else {
+            return null;
+        }
+    });
+}
+function getAllUsers() {
+    return __awaiter(this, void 0, void 0, function* () {
+        const users = yield UserModel_1.default.find();
+        return users;
+    });
+}
+function getCandidateById(idCandidate) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const candidate = yield CandidateModel_1.default.find();
+        const candidateFind = candidate.find((c) => c.id === idCandidate);
+        if (candidateFind) {
+            return candidateFind;
+        }
+        else {
+            return null;
         }
     });
 }

@@ -5,30 +5,34 @@ import Error from "./components/User/Error";
 import VotingPage from "./components/candidates/ListCandidates/VotingPage";
 import { Route, Routes } from "react-router-dom";
 import Statistics from "./components/Statistics/Statistics";
-import PrivateRoute from "./components/PrivateRoute";
+import PrivateRouteAdmin from "./components/PrivateRouteAdmin";
 import { useSelector } from "react-redux";
 import { selectUser } from "./store/features/users/usersSlice";
+import PrivateRouteToken from "./components/PrivateRouteToken";
 
 function App() {
-    const data = useSelector(selectUser);
+  const data = useSelector(selectUser);
 
   return (
     <div className="App">
       <Routes>
-        <Route path="/register" element={<Registration />} />
+        <Route path="/register" element={<Registration ><Error/></Registration>} />
         <Route path="/" element={<Login />} />
-        <Route path="/votes" element={<VotingPage />} />
+        <Route
+          path="/votes"
+          element={<PrivateRouteToken children={<VotingPage />} ></PrivateRouteToken>}
+        />
         <Route
           path="/statistics"
           element={
-            <PrivateRoute
+            <PrivateRouteAdmin
               isAdmin={data.user?.data?.isAdmin === true ? true : false}
               children={<Statistics />}
-            ></PrivateRoute>
+            ></PrivateRouteAdmin>
           }
         />
       </Routes>
-      <Error />
+      
     </div>
   );
 }

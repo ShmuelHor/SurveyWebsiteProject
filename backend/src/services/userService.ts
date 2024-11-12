@@ -1,10 +1,10 @@
 import User, { IUser } from "../models/UserModel";
-import Candidate, { ICandidate } from "../models/CandidateModel";
 import { v4 as uuidv4 } from "uuid";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
-import {IfUserExists} from "../utils/utils";
+import {getCandidateById, getUSerById, IfUserExists} from "../utils/utils";
+import { ICandidate } from "../models/CandidateModel";
 
 dotenv.config();
 
@@ -60,18 +60,6 @@ export const login = async (username: string, password: string) => {
   }
 };
 
-export const getAllCandidates = async () => {
-  try {
-    const candidate: ICandidate[] = await Candidate.find();
-    if (!candidate) {
-      throw new Error("No candidates found");
-    }
-    return candidate;
-  } catch (err) {
-    throw err;
-  }
-};
-
 export const getAllUsers = async () => {
   try {
     const user: IUser[] = await User.find();
@@ -83,3 +71,27 @@ export const getAllUsers = async () => {
     throw err;
   }
 };
+
+export const updateUserVoteStatus = async (idUser: string, idCandidate: string) => {
+    try {
+      const user: IUser | null = await getUSerById(idUser);
+      if (!user) {
+        throw new Error("User not found");
+      }
+  
+      const candidate: ICandidate | null = await getCandidateById(idCandidate);
+      if (!candidate) {
+        throw new Error("Candidate not found");
+      }
+  
+      user.hasVoted = true;
+      user.votedFor = candidate;
+  
+      const updatedUser = await user.save();
+      const Users = await getAllUsers();
+      return Users;
+    } catch (err) {
+      throw err;
+    }
+  };
+  

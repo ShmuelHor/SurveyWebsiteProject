@@ -1,7 +1,6 @@
-import { createUser,login,getAllCandidates,getAllUsers} from '../services/userService';
+import { createUser,login,getAllUsers} from '../services/userService';
 import e, { Request, Response ,NextFunction} from 'express';
 import { IUser } from '../models/UserModel';
-import { ICandidate } from '../models/CandidateModel';
 
 
 export const createUserHandler = async (req: Request, res: Response): Promise<void> => {
@@ -15,7 +14,7 @@ export const createUserHandler = async (req: Request, res: Response): Promise<vo
     }
   };
 
-  export const loginHandler = async (req: Request, res: Response): Promise<void> => {
+export const loginHandler = async (req: Request, res: Response): Promise<void> => {
     try {
         const {username, password} = req.body;
         
@@ -34,14 +33,6 @@ export const createUserHandler = async (req: Request, res: Response): Promise<vo
     }
 }
 
-export const getCandidatesHandler = async (req: Request, res: Response): Promise<void> => {
-    try {
-        const Candidates: ICandidate[] = await getAllCandidates();
-        res.status(200).json({ data: Candidates, success: true });
-    } catch (error: any) {
-        res.status(400).json({ message: error.message, success: false });
-    }
-}
 export const getAllUsersHandler = async (req: Request, res: Response): Promise<void> => {
     try {
         const users: IUser[] = await getAllUsers();

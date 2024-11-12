@@ -1,0 +1,32 @@
+/* מיכל השגיאה */
+.error-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 300px; /* מקסימום רוחב מצומצם */
+  }
+  
+  /* הודעת שגיאה */
+  .error-message {
+    background-color: #ff4d4d; /* אדום בהיר */
+    color: white;
+    font-size: 16px; /* גודל טקסט קטן יותר */
+    font-weight: bold;
+    padding: 4px 5px; /* padding קטן יותר */
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* צללית רכה */
+    border: 2px solid #e60000; /* גבול אדום כהה */
+    width: 100%;
+    max-width: 300px; /* רוחב מקסימלי צר */
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  /* אפקט Hover על הודעת שגיאה */
+  .error-message:hover {
+    transform: scale(1.05); /* אפקט הגדלה קל */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  }
+  
+  

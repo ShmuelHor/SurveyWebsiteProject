@@ -1,0 +1,158 @@
+/* כללי */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  /* מיכל הכללי */
+  .page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px 20px;
+    background-color: #f2f2f2;
+    min-height: 100vh;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* כותרת הדף */
+  .page-header {
+    text-align: center;
+    font-size: 38px;
+    font-weight: bold;
+    color:  #333; /* Golden Ball yellow */
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #ffb400, #ff7f00);
+    padding: 20px 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 850px;
+    margin-left: auto;
+    margin-right: auto;
+    transition: all 0.3s ease;
+  }
+  
+  /* מיכל כפתורים - Statistics ו-Logout */
+  .buttons-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+  
+  /* כפתור Statistics */
+  .statistics-button {
+    background-color: #ffb400;
+    color: white;
+    border: none;
+    padding: 12px 22px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-right: 20px;
+  }
+  
+  .statistics-button:hover {
+    background-color: #e68900;
+    transform: translateY(-3px); /* אפקט הזזה קל במעבר */
+  }
+  
+  /* כפתור Logout */
+  .logout-button {
+    background-color: #333;
+    color: white;
+    border: none;
+    padding: 12px 22px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .logout-button:hover {
+    background-color: #555;
+    transform: translateY(-3px);
+  }
+  
+  /* מיכל הקלפים - תיבה שמחזיקה את הקלפים */
+  .card-container {
+    display: flex;
+    flex-wrap: wrap; /* מאפשר קלפים לרדת שורה אם יש יותר מדי קלפים */
+    justify-content: flex-start;
+    gap: 20px; /* רווח בין הקלפים */
+    margin-top: 20px;
+    width: 100%;
+    max-width: 1200px; /* רוחב מקסימלי */
+    padding: 20px;
+    background-color: #292929; /* רקע כהה למיכל */
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* צלליות מודרניות ועמוקות */
+    box-sizing: border-box;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  /* הגדרת גודל אחיד של כל קלף */
+  .card-container .card {
+    width: calc(25% - 20px); /* 4 קלפים בשורה */
+    min-width: 250px;
+    margin-bottom: 20px;
+    background-color: #333;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  /* אפקט Hover על קלף */
+  .card-container .card:hover {
+    transform: translateY(-5px); /* אפקט הזזה כלפי מעלה */
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3); /* הצללה חזקה יותר */
+  }
+  
+  /* כפתור Vote */
+  .vote-button {
+    background-color: #ffb400;
+    color: white;
+    border: none;
+    padding: 12px 0;
+    width: 100%;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  
+  .vote-button:hover {
+    background-color: #e68900;
+    transform: translateY(-3px); /* אפקט הזזה קל במעבר */
+  }
+  
+  /* עיצוב בעת שינוי רספונסיביות */
+  @media (max-width: 1024px) {
+    .card-container .card {
+      width: calc(33.33% - 20px); /* 3 קלפים בשורה */
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .card-container .card {
+      width: calc(50% - 20px); /* 2 קלפים בשורה */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .card-container .card {
+      width: 100%; /* קלף אחד בשורה */
+    }
+  }
+  

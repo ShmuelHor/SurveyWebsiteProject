@@ -1,0 +1,117 @@
+/* כללי */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* דף הצבעה */
+  .voting-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #f4f4f4;
+    min-height: 100vh;
+  }
+  
+  /* כותרת הדף */
+  h1 {
+    font-size: 32px;
+    margin-bottom: 30px;
+    color: #333;
+  }
+  
+  /* מיכל הקלפים */
+  .card-container {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 1200px;
+  }
+  
+  /* עיצוב קלף שחקן */
+  .player-card {
+    background-color: #333;
+    color: white;
+    width: 180px;        /* רוחב קלף */
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    padding: 15px;
+    position: relative;
+    transition: transform 0.3s ease;
+  }
+  
+  .player-card:hover {
+    transform: translateY(-10px); /* אפקט של Hover */
+  }
+  
+  /* עיצוב החלק של הצבעות */
+  .votes {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-weight: bold;
+    font-size: 14px;
+  }
+  
+  /* עיצוב תמונת השחקן */
+  .player-image {
+    width: 150px;         /* רוחב קבוע לתמונה */
+    height: 150px;        /* גובה קבוע לתמונה */
+    border-radius: 50%;   /* צורת עיגול */
+    overflow: hidden;     /* מוודא שהתמונה לא תברח */
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .player-image img {
+    width: 100%;          /* תמונה תמלא את המיכל */
+    height: 100%;         /* גובה אחיד לתמונה */
+    object-fit: cover;    /* שמירה על פרופורציות התמונה תוך חיתוך חלקי אם צריך */
+  }
+  
+  /* עיצוב שם השחקן */
+  .player-name p {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  
+  /* עיצוב כפתור הצבעה */
+  .vote-button {
+    background-color: #ffb400;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .vote-button:hover {
+    background-color: #e68900;
+  }
+  
+  /* הגדרות רספונסיביות */
+  @media (max-width: 768px) {
+    .card-container {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .player-card {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+  }
+  
